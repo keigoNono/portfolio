@@ -2,17 +2,15 @@
 
 # NumPy
 # 高度な数値計算ができるライブラリ
-# Pythonのリストとは処理が異なる
+# Python のリストとは処理が異なる
 # 配列同士の計算や、行列計算が可能
-
-!pip install numpy
+# !pip install numpy
 import numpy as np
 
-# ndarray配列
-# 1次元配列
+# ndarray 配列
+# 1 次元配列
 # np.array(リスト)
-# Pythonのリストとは処理が異なる
-
+# Python のリストとは処理が異なる
 x_li = [10, 14, 19]
 x_np = np.array([10, 14, 19])
 
@@ -22,32 +20,30 @@ y = np.array(["A", "B", "C"])
 
 # 多次元の配列の作成
 
-# 2次元配列
+# 2 次元配列
 x_2d = np.array(
     [[10, 14, 15],
      [20, 24, 26]]
 )
 
-# 3次元配列
+# 3 次元配列
 x_3d = np.array(
     [[[10, 11], [13, 14], [16, 17]],
      [[20, 21], [23, 24], [26, 27]]]
 )
 
 # 配列の操作
-# 次元を調べる ndim
+# .ndim: 次元を調べる 
 print(x_np.ndim, x_2d.ndim, x_3d.ndim)
 
-
-# 各次元のサイズを調べる shape
+# .shape: 各次元のサイズを調べる
 print(x_np.shape, x_2d.shape, x_3d.shape)
 
 # 初期化
-# np.zeros(作りたい配列のshape)
-# ones((サイズ1, サイズ2, ...))だとすべての要素を1で初期化する
-# empty(サイズ1, サイズ2, ...)だと要素が空の配列　高速
-# ramdom.rand(サイズ1, サイズ2, ...)だとすべての要素を0~1のランダムな値で初期化する
-
+# np.zeros(作りたい配列のshape)     : すべての要素を 0 で初期化
+# np.ones((サイズ1, サイズ2, ...))  : すべての要素を 1 で初期化
+# np.empty(サイズ1, サイズ2, ...)   : 要素が空の配列で初期化 高速
+# ramdom.rand(サイズ1, サイズ2, ...): すべての要素を 0 ~ 1 のランダムな値で初期化
 print(np.zeros(3))
 print(np.ones((2,3)))
 print(np.empty((2,4)))
@@ -68,7 +64,7 @@ print(x - 2)
 print(x * 2)
 print(x / 2)
 
-# 同じshapeの配列同士の四則演算
+# 同じ shape の配列同士の四則演算
 # 演算は要素同士で行われる
 # 足し算: 配列1 + 配列2
 # 引き算: 配列1 - 配列2
@@ -91,7 +87,7 @@ print(x * y)
 print(x / y)
 
 # 異なる大きさの配列で四則演算できる場合
-# 1次元配列のサイズと
+# 1 次元配列のサイズと
 # 多次元配列の最後の次元のサイズが同じ
 
 x = np.array(
@@ -105,8 +101,8 @@ print(x - y)
 print(x * y)
 print(x / y)
 
-# n行1列の2次元配列の行サイズと
-# 多次元配列の最後から2番目の次元のサイズが同じ
+# n 行 1 列の 2 次元配列の行サイズと
+# 多次元配列の最後から 2 番目の次元のサイズが同じ
 
 x = np.array(
     [[2],
@@ -143,8 +139,8 @@ y = np.array(
 print(np.dot(x,y))
 
 # 配列の変形
-# reshape(変形後のshape)
-# 変形前と変形後の要素数が等しくないとエラーが出る
+# reshape(変形後の shape)
+# 変形前と変形後の要素数が等しくないとエラー
 
 x = np.array(
     [range(1,4),
@@ -153,8 +149,8 @@ x = np.array(
 
 print(x.reshape(3,2))
 
-# 1次元配列に変形
-# flatten()
+# 1 次元配列に変形
+# .flatten()
 
 x = np.array(
     [range(1,4),
@@ -176,11 +172,10 @@ print(x[:, 1])
 print(x[1, 1])
 print(x[0:2, 0:2])
 
-
 # 配列の結合
-# np.concatenate([配列1, 配列2], 軸)
+# np.concatenate([配列 1, 配列 2], 軸)
 # 軸未指定だと縦に結合
-# 1を指定すると横に結合
+# 1 を指定すると横に結合
 
 x = np.array(
     [range(1,4),
@@ -197,18 +192,18 @@ print(np.concatenate([x, y]))
 print(np.concatenate([x, y], 1))
 
 # 組み込み関数
-# 最大値  : np.max(配列やリスト)
-# 最小値  : np.min(配列やリスト)
-# 合計    : np.sum(配列やリスト)
-# 要素の積: np.prod(配列やリスト)
-# 平均    : np.mean(配列やリスト)
-# 標準偏差: np.std(配列やリスト)
-# 分散    : np.var(配列やリスト)
-# 中央値  : np.median(配列やリスト)
+# 最大値   : np.max(配列やリスト)
+# 最小値   : np.min(配列やリスト)
+# 合計     : np.sum(配列やリスト)
+# 要素の積 : np.prod(配列やリスト)
+# 平均     : np.mean(配列やリスト)
+# 標準偏差 : np.std(配列やリスト)
+# 分散     : np.var(配列やリスト)
+# 中央値   : np.median(配列やリスト)
 
-# 対数  : np.log(数値)
-# 平方根: np.sqrt(数値)
-# sin   : np.sin(数値)
-# cos   : np.cos(数値)
-# tan   : np.tan(数値)
-# 円周率: np.pi
+# 対数   : np.log(数値)
+# 平方根 : np.sqrt(数値)
+# sin    : np.sin(数値)
+# cos    : np.cos(数値)
+# tan    : np.tan(数値)
+# 円周率 : np.pi
