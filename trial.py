@@ -1,5 +1,5 @@
-x = [20, 12, 40]
-x.append(92) # 追加したい値を引数に入れる
-x.remove(12) # 削除したい値を引数に入れる
-
-print(x)
+import matplotlib.pyplot as plt
+label = ["A", "B", "C", "D"]
+num = [20, 17, 25, 9]
+plt.bar(label, num)
+plt.savefig('./bar.png')
