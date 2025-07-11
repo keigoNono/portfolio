@@ -65,7 +65,11 @@ print(sr)
 # read_excel("ファイルのパス")
 # index_col  = "列名"    : インデックスとして扱いたい列の指定
 # sheet_name = "シート名": 1 枚目以外のシートの参照
-pd.read_excel("user_data.xlsx", index_col = "ユーザID")
+
+# エラー: Missing optional dependency 'xlrd'
+# xlrd をインストールしても xlsx に対応しておらずエラー
+# openpyxl を通じてもエラー: File is not a zip file
+pd.read_excel("user_data.xlsx", index_col = "ユーザID", engine = "openpyxl") 
 
 # csvファイル読み込み
 # read_csv("ファイルのパス")
