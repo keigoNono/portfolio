@@ -1,58 +1,67 @@
 # 勉強元リンクhttps://www.youtube.com/watch?v=tCMl1AWfhQQ&ab_channel=Python%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0VTuber%E3%82%B5%E3%83%97%E3%83%BC
+# => (出力結果)
 
 print("こんにちは")
+# => こんにちは
 
 print("あいうえお")
 print("かきくけこ")
 print("さしすせそ")
+# => あいうえお
+# => かきくけこ
+# => さしすせそ
 
 # 1行の終端は改行か;
 # ;はほぼ使わない
-print("あいうえお")print("かきくけこ")
+# print("あいうえお")print("かきくけこ") # エラー
 print("あいうえお");print("かきくけこ")
+# => あいうえお
+# => かきくけこ
 
 # 大文字と小文字は区別される
 # 以下はエラーになる
-Print("あいうえお")
+# Print("あいうえお")
 
-# 長い計算式の改行は()で囲んで行う
+# 長い計算式の改行は () で囲んで行う
 (1000 + 5000 + 8000 + 9000 + 1300
  + 6000 + 25000 + 90000)
 
-# コメントは#
-# #以降は全てコメント
-print("あいうえお") # コメントはこのようにも書ける
+# コメントは #
+# # 以降は行全てがコメント
+print("あいうえお") # コメントはこの場所にも書ける
 
 x = 10
 x = 100
-x = y # yには100が入る
+y = x #  yには 100 が入る
 # 変数名はどんなデータが入っているかわかるような名前に
 
 apple_price = 200
-print(apple_price) # 200と表示される
+print(apple_price)
+# => 200
 
+# 変数の型は値が代入されたタイミングで自動で決まる
 name = '斎藤'; # ""でもよい
 weight = 54.5
-# 変数の型は値が代入されたタイミングで自動で決まる
 
-# 型によってできることが違う
 # 同じ命令でも型によって動作が違う
 x = 100
 y = 200
-z = x + y #zは300
+z = x + y # z は 300
 
 x = '100'
 y = '200'
-z = x + y # zは'100200'
+z = x + y # z は '100200'
 
-z = 100 + '100' # エラー
+# z = 100 + '100' # エラー java だと "100100"
 
-# 変数の型はtypeで調べる
+# 変数の型は type() で調べる
+x = 100
 print(type(x))
+# => <class 'int'>
 
 # 変数の型変換
 x = '10'
-y = int(x) # int型の10
+y = int(x) # int 型の 10 に変換
 
 apple_price = 100
 a_type = type(apple_price)
@@ -63,58 +72,76 @@ n_type = type(name)
 weight = 54.5
 w_type = type(weight)
 
-print(apple_price, name, weight)
 print(a_type, n_type, w_type)
+# => <class 'int'> <class 'str'> <class 'float'>
 
-
-math = 82
+# 練習: 平均の計算
+math     = 82
 japanese = 74
-english = 60
+english  = 60
 
 avg_score = (math + japanese + english) / 3
 print(avg_score)
+# => 72.0
 
 x = 100
 y = 0
-z = x / y # 0で割ったのでエラー
-print(z)
+# z = x / y # 0 で割ったのでエラー
 
+# 練習: 文字列結合
 surname = '佐々木'
 given_name = 'まゆ'
 full_name = surname + given_name
 print(full_name)
+# => 佐々木まゆ
 
 # 変数埋め込み
 price = 100
 text = f"この商品は{price}円です"
 print(text)
+# => この商品は100円です
 
 # リスト
 student_names = ["斎藤", "小林", "佐々木", "田中"]
 
-print(student_names[0]) # インデックスは0から始まる
+print(student_names[0]) # インデックスは 0 から始まる
+# => 斎藤
 print(student_names[2])
+# => 佐々木
 print(student_names[-1]) #インデックスが負の場合は後ろから数える
+# => 田中
 print(student_names[-3])
-
+# => 小林
 
 # リストの長さの取得
 print(len(student_names))
-
+# => 4
 
 # リストの分割
 # リスト[開始位置:終了位置]
 student_names = ["斎藤", "小林", "佐々木", "田中", "渡辺", "高橋"]
 # 分割用の番号  0      1       2         3       4       5       6
-#              -6     -5      -4        -3      -2      -1
+#             -6     -5      -4        -3      -2      -1
 print(student_names[1:3])
-print(student_names[3:1]) # 開始位置 > 終了位置だとからのリストを返す
+# => ['小林', '佐々木']
 print(student_names[-3:-1])
-print(student_names[-3:0]) # インデックスの指定に負の値と0は同時に使えない　からのリストを返す
+# => ['田中', '渡辺']
+
 print(student_names[:2]) # 開始位置の省略すると先頭から
-print(student_names[3:]) # 終了位置を省略すると終端まで
+# => ['斎藤', '小林']
 print(student_names[:-4])
+# => ['斎藤', '小林']
+
+print(student_names[3:]) # 終了位置を省略すると終端まで
+# => ['田中', '渡辺', '高橋']
 print(student_names[-4:])
+# => ['佐々木', '田中', '渡辺', '高橋']
+
+print(student_names[3:1]) # 開始位置 > 終了位置だと空のリストを返す
+# => []
+print(student_names[-3:0]) # 負の値と 0 は同時に使えず、空のリストを返す
+# => []
+
 
 # 空のリスト生成
 x = []
@@ -124,20 +151,19 @@ y = list()
 x = ["a", "b"]
 y = ["A", "B"]
 print(x + y)
+# => ['a', 'b', 'A', 'B']
 
 # 要素の追加、削除
 x = [20, 12, 40]
-
-#scores.append(92, 70) # エラー
-x.append(92)
-x.remove(12) # 削除したい 値 を引数に入れる
+x.append(92) # 追加したい値を引数に入れる
+x.remove(12) # 削除したい値を引数に入れる
 
 print(x)
+# => [20, 40, 92]
 
 # リストに格納できるもの
-x = ["a", "b", "a"] # 同じものでも別々のものと解釈される
+x = ["a", "b", "a"]  # 同じものでも別々のものと解釈される
 y = [1, 2, "a", "b"] # 型が違うものも入れられる
-
 
 # 組み込み関数
 x = [20, 12, 40]
