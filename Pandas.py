@@ -35,15 +35,31 @@ df = pd.DataFrame({
     "血液型": [     "A",    "AB",     "O"]
 },   index = [   "i-1",   "i-2",    "i-3"])
 
+print(df)
+# =>      名前  年齢   住所 血液型  
+# => i-1  佐藤  21  東京都   A  
+# => i-2  斎藤  30  岐阜県  AB 
+# => i-3  鈴木  18  埼玉県   O 
+
 # 新たな列の追加
 df["身長"] = [160, 170, 180]
 print(df)
+# =>      名前  年齢   住所 血液型   身長
+# => i-1  佐藤  21  東京都   A  160
+# => i-2  斎藤  30  岐阜県  AB  170
+# => i-3  鈴木  18  埼玉県   O  180
 
 # Series の生成
 # 書式
 # pd.Series(リスト, index = リスト)
-pd.Series(  ["佐藤", "斎藤", "鈴木"],
+sr = pd.Series(  ["佐藤", "斎藤", "鈴木"],
     index = [ "i-1", "i-2",  "i-3"])
+
+print(sr)
+# => i-1    佐藤
+# => i-2    斎藤
+# => i-3    鈴木
+# => dtype: object
 
 # エクセルファイル読み込み
 # read_excel("ファイルのパス")
@@ -175,8 +191,20 @@ df_3 = pd.DataFrame({
 })
 
 print(pd.concat([df_1, df_2]))
-print()
+# =>    名前  年齢   住所
+# => 0  佐藤  21  東京都
+# => 1  斎藤  30  岐阜県
+# => 2  鈴木  18  埼玉県
+# => 0  秋山  19  大阪府
+# => 1  橋本  51  千葉県
+
 print(pd.concat([df_1, df_3]))
+# =>    名前  年齢   住所
+# => 0  佐藤  21  東京都
+# => 1  斎藤  30  岐阜県
+# => 2  鈴木  18  埼玉県
+# => 0  田中  40  NaN
+# => 1  渡辺  33  NaN
 
 # 横に結合
 # concat([df_1, df_2, ...], axis = 1)
@@ -191,6 +219,10 @@ df_2 = pd.DataFrame({
 })
 
 print(pd.concat([df_1, df_2], axis = 1))
+# =>    名前  年齢   住所 レベル
+# => 0  佐藤  21  東京都   A
+# => 1  斎藤  30  岐阜県   B
+# => 2  鈴木  18  埼玉県   S
 
 # DataFrame の merge での結合
 # キーを基準に横に結合する
@@ -211,13 +243,24 @@ df_2 = pd.DataFrame({
 })
 
 print(pd.merge(df_1, df_2, on = "id"))
-print()
+# =>      id  名前  年齢   住所 レベル
+# => 0  000A  佐藤  21  岐阜県   B
+# => 1  000E  斎藤  30  埼玉県   S
+# 2=>   000Q  鈴木  18  東京都   A
 
 print(pd.merge(df_1, df_2, on = "id", how = "left"))
-print()
+# =>      id  名前  年齢   住所  レベル
+# => 0  000A  佐藤  21  岐阜県    B
+# => 1  000E  斎藤  30  埼玉県    S
+# => 2  000Q  鈴木  18  東京都    A
+# => 3  000Y  藤井  53  NaN  NaN
 
 print(pd.merge(df_1, df_2, on = "id", how = "right"))
-print()
+# =>      id   名前    年齢   住所 レベル
+# => 0  000Q   鈴木  18.0  東京都   A
+# => 1  000A   佐藤  21.0  岐阜県   B
+# => 2  000E   斎藤  30.0  埼玉県   S
+# => 3  000Z  NaN   NaN  広島県   C
 
 # map と lambda 式
 # df["新たな列名"] = df["既存の列名"].map(lambda 式)
@@ -229,6 +272,11 @@ df = pd.DataFrame({
 df["区分"] = df["年齢"].map(lambda x: "成人" if x >= 20 else "未成年")
 
 print(df)
+# =>      id  年齢   区分
+# => 0  000A  21   成人
+# => 1  000E  30   成人
+# => 2  000Q  18  未成年
+# => 3  000Y  53   成人
 
 # グラフの描画用ライブラリ
 # !pip install japanize-matplotlib
