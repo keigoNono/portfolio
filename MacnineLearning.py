@@ -1,19 +1,20 @@
 # 参考書籍: 池田雄太郎, 田尻俊宗, 新保雄大 (2023) 実務で役立つPython機械学習入門 課題解決のためのデータ分析の基礎, 翔泳社
 
 # 必要なライブラリをインポート
-import numpy as np
-import pandas as pd
+import numpy   as np
+import pandas  as pd
 import seaborn as sns
-from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
 import itertools
+
+from sklearn.metrics         import mean_squared_error
+from sklearn.model_selection import train_test_split
+from sklearn.metrics         import accuracy_score
 
 # 訓練データとテストデータの作成
 def gen_dataset_for_regression():
   iris_df = sns.load_dataset("iris")
   # 説明変数の設定
-  X = iris_df.loc[:,"sepal_width":"petal_width"]
+  X = iris_df.loc[:, "sepal_width":"petal_width"]
 
   # 目的変数の設定
   y = iris_df["sepal_length"]
@@ -37,9 +38,9 @@ def calc_pred_error(X, y, model, metric):
   return pred_error
 
 # 予測誤差の算出　LightGBM用
-def calc_pred_error_for_lgb(X, y, model):
+def rmse_for_lgb(X, y, model):
   # モデルによる予測
-  pred = model.predict(X, num_iteration=model_LGB.best_iteration)
+  pred = model.predict(X, num_iteration = model_LGB.best_iteration)
 
   # 予測誤差の算出　評価にはRMSEを使用
   pred_error = RMSE(y, pred)
@@ -55,7 +56,7 @@ def calc_pred_error_for_lgb(X, y, model):
 from sklearn.linear_model import LinearRegression
 
 # データセットの生成
-train_X, test_X, train_y, test_y = gen_dataset_for_regression
+train_X, test_X, train_y, test_y = gen_dataset_for_regression()
 
 # モデルの初期化、学習
 model_L = LinearRegression()
@@ -75,7 +76,7 @@ print(test_error) # 0.338...
 from sklearn.linear_model import Ridge
 
 # データセットの生成
-train_X, test_X, train_y, test_y = gen_dataset_for_regression
+train_X, test_X, train_y, test_y = gen_dataset_for_regression()
 
 # モデルの初期化、学習
 model_R = Ridge()
@@ -96,7 +97,7 @@ print(test_error) # 0.360...
 from sklearn.tree import DecisionTreeRegressor
 
 # データセットの生成
-train_X, test_X, train_y, test_y = gen_dataset_for_regression
+train_X, test_X, train_y, test_y = gen_dataset_for_regression()
 
 # モデルの初期化、学習
 model_D = DecisionTreeRegressor()
@@ -117,7 +118,7 @@ print(test_error) # 0.488...
 from sklearn.ensemble import RandomForestRegressor
 
 # データセットの生成
-train_X, test_X, train_y, test_y = gen_dataset_for_regression
+train_X, test_X, train_y, test_y = gen_dataset_for_regression()
 
 # モデルの初期化、学習
 model_RF = RandomForestRegressor()
@@ -135,10 +136,11 @@ print(test_error) # 0.299...
 # 参考リンク: https://nuco.co.jp/blog/article/HZMvO2L4
 
 # ライブラリの読み込み
+# pip install lightgbm
 import lightgbm as lgb
 
 # データセットの生成
-train_X, test_X, train_y, test_y = gen_dataset_for_regression
+train_X, test_X, train_y, test_y = gen_dataset_for_regression()
 
 # パラメータの設定
 params = {
@@ -166,23 +168,24 @@ model_LGB = lgb.train(
   callbacks       = [early_stopping])
 
 # 訓練誤差の算出
-training_error = calc_pred_error_for_lgb(train_X, train_y, model_LGB)
+training_error = rmse_for_lgb(train_X, train_y, model_LGB)
 print(training_error) # 0.350...
 
 # テスト誤差の算出
-test_error = calc_pred_error_for_lgb(test_X, test_y, model_LGB)
+test_error = rmse_for_lgb(test_X, test_y, model_LGB)
 print(test_error) # 0.371...
 
 # 6: ニューラルネットワーク
 # 参考リンク: https://rinsaka.com/python/nn-regression.html
 
 # ライブラリの読み込み
-# !pip install keras
+# pip install keras
+# pip install tensorflow
 from keras.models import Sequential
 from keras.layers import Dense
 
 # データセットの生成
-train_X, test_X, train_y, test_y = gen_dataset_for_regression
+train_X, test_X, train_y, test_y = gen_dataset_for_regression()
 
 # モデルの初期化、学習
 # モデル構造の定義
@@ -219,7 +222,7 @@ print(test_error) # 0.277...
 def gen_dataset_for_classification():
   iris_df = sns.load_dataset("iris")
   # 説明変数の設定
-  X = iris_df.loc[:,"sepal_length":"petal_width"]
+  X = iris_df.loc[:, "sepal_length":"petal_width"]
 
   # 目的変数の設定
   y = iris_df["species"]
@@ -240,7 +243,7 @@ def label_to_int(label):
 # accuracyの算出 多クラス分類のLightGBM用
 def accuracy_score_for_LGB(X, y, model):
   # モデルによる予測
-  pred = model.predict(X, num_iteration=model.best_iteration)
+  pred = model.predict(X, num_iteration = model.best_iteration)
 
   # 予測誤差の算出
   pred_max   = [list(x).index(max(x)) for x in pred]
@@ -338,6 +341,7 @@ print(test_error) # 0.967...
 # 参考リンク: https://qiita.com/yuya2220/items/c45ac382754d909d302e
 
 # ライブラリの読み込み
+# pip install lightgbm
 import lightgbm as lgb
 
 # データセットの生成
@@ -362,14 +366,14 @@ params = {
 }
 
 # early_stoppingを使用するためのcallbackの設定
-early_stopping = lgb.early_stopping(stopping_rounds=10)
+early_stopping = lgb.early_stopping(stopping_rounds = 10)
 
 # モデルの学習
 model_LGB = lgb.train(
   params, 
   lgb.Dataset(train_X, label=train_y), 
   num_boost_round = 100,
-  valid_sets      = lgb.Dataset(test_X, label=test_y), 
+  valid_sets      = lgb.Dataset(test_X, label = test_y), 
   valid_names     = ['species'],
   callbacks       = [early_stopping])
 
@@ -385,7 +389,8 @@ print(test_error) # 0.967...
 # 参考リンク: https://rinsaka.com/python/nn-regression.html
 
 # ライブラリの読み込み
-# !pip install keras
+# pip install keras
+# pip install tensorflow
 from keras.models import Sequential
 from keras.layers import Dense
 
