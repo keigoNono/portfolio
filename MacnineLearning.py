@@ -1,12 +1,14 @@
 # 参考書籍: 池田雄太郎, 田尻俊宗, 新保雄大 (2023) 実務で役立つPython機械学習入門 課題解決のためのデータ分析の基礎, 翔泳社
 
 # 必要なライブラリをインポート
-def import_library():
-  import numpy as np
-  import pandas as pd
-  import seaborn as sns
-  from sklearn.metrics import mean_squared_error
-  from sklearn.model_selection import train_test_split
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
+
+from sklearn.metrics import accuracy_score
+import itertools
 
 
 
@@ -294,17 +296,6 @@ def accuracy_score_for_NN(X, y, model):
   pred_error = accuracy_score(y, pred_discretized)
 
   return pred_error
-
-# 必要なライブラリをインポート
-import numpy as np
-import pandas as pd
-import seaborn as sns
-from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import train_test_split
-
-from sklearn.metrics import accuracy_score
-import itertools
-
 
 # 分類問題アルゴリズム
 
